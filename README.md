@@ -1,7 +1,7 @@
 # **E-Library Website**
 
 Welcome to E-Library—your gateway to digital learning! Our modern platform is designed to empower education through cutting-edge technology. The E-Library provides seamless access to a vast collection of academic resources, research papers, and digital content, offering everything you need to enhance learning and research.
-Visit the Website: [E-Library]()
+
 ---
 
 ## **Features**
@@ -32,5 +32,3 @@ Visit the Website: [E-Library]()
 ### **Backend**
 - **Django**: High-level Python framework for robust and scalable backend development.  
 - **PostgreSQL**: Relational database for efficient storage and management of academic resources.
-
----
