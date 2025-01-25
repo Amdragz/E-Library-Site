@@ -27,6 +27,24 @@ const socialLinks = [
   },
 ];
 
+const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+  e.preventDefault();
+
+  if (link.startsWith("#")) {
+    const targetId = link.replace("#", "");
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  } else {
+    window.location.href = link;
+  }
+};
+
 export default function Footer({ isLoggedIn }: FooterProps) {
   return (
     <footer className="w-full py-4 md:py-10 px-4 sm:px-6 lg:px-8 mt-8 max-w-[82rem] mx-auto">
@@ -49,6 +67,7 @@ export default function Footer({ isLoggedIn }: FooterProps) {
                 <Link
                   className="inline-flex gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                   to={link.href}
+                  onClick={(e) => handleScroll(e, link.href)}
                 >
                   {link.label}
                 </Link>
@@ -67,6 +86,7 @@ export default function Footer({ isLoggedIn }: FooterProps) {
                 <Link
                   className="inline-flex gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                   to={link.href}
+                  onClick={(e) => handleScroll(e, link.href)}
                 >
                   {link.label}
                 </Link>

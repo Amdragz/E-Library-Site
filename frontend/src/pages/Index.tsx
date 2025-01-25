@@ -1,10 +1,10 @@
-import Articles from "../components/articles";
-import HeroSection from "../components/heroSection";
-import News from "../components/news";
+import Articles from "../components/index/articles";
+import HeroSection from "../components/index/heroSection";
+import News from "../components/index/news";
 
 export default function Index() {
   return (
-    <div className="max-w-[82rem] mx-auto">
+    <div>
       <HeroSection />
       <Articles />
       <News />

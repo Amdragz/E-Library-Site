@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import Book, { Books } from "../components/book";
-import Pagination from "../components/pagination";
+import Book, { Books } from "../components/library/book";
+import Pagination from "../components/common/pagination";
 // import api from "../api";
 
 export default function Library() {

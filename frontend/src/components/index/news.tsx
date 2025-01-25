@@ -45,7 +45,7 @@ const news: NewsItem[] = [
 
 export default function News() {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+    <div  id="news" className="w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
       <div className="max-w-2xl text-center mx-auto mb-10 lg:mb-14">
         <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
           Read our latest news

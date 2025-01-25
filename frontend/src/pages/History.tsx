@@ -1,4 +1,4 @@
-import BookHistory from "../components/bookHistory";
+import BookHistory from "../components/history/bookHistory";
 
 export default function History() {
   return (

@@ -1,8 +1,14 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
-import Footer from "./components/footer";
-import Navbar from "./components/navbar";
-// import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./components/common/footer";
+import Navbar from "./components/common/navbar";
+// import ProtectedRoute from "./components/auth/ProtectedRoute";
 import History from "./pages/History";
 import Home from "./pages/Home";
 import Index from "./pages/Index";
@@ -21,16 +27,20 @@ function RegisterAndLogout() {
   return <Register />;
 }
 
-function App() {
-  const location = window.location.pathname;
+function Layout() {
+  const location = useLocation();
+  const hideNavAndFooter =
+    location.pathname === "/login" || location.pathname === "/register";
+  const isLoggedInUser =
+    location.pathname === "/home" ||
+    location.pathname === "/library" ||
+    location.pathname === "/history";
 
   return (
-    <BrowserRouter>
-      {location === "/login" || location === "/register" ? (
-        <></>
-      ) : (
-        <Navbar isLoggedIn={true} />
-      )}
+    <>
+      {!hideNavAndFooter && !isLoggedInUser && <Navbar isLoggedIn={false} />}
+      {isLoggedInUser && <Navbar isLoggedIn={true} />}
+
       <Routes>
         <Route path="/" element={<Index />} />
         <Route
@@ -60,13 +70,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
-        <Route path="*" element={<NotFound />}></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      {location === "/login" || location === "/register" ? (
-        <></>
-      ) : (
-        <Footer isLoggedIn={false} />
-      )}
+      {!hideNavAndFooter && !isLoggedInUser && <Footer isLoggedIn={false} />}
+      {isLoggedInUser && <Footer isLoggedIn={true} />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
     </BrowserRouter>
   );
 }

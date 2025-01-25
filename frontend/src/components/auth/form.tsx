@@ -1,44 +1,53 @@
 "use client";
 
 import React, { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import "../styles/form.css";
-import LoadingIndicator from "./loadingIndicator";
+// import api from "../../api";
+// import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
+import "../../styles/form.css";
+import LoadingIndicator from "../common/loadingIndicator";
 
 interface FormProps {
   route: string;
   method: "Login" | "Register";
 }
 
-export default function Form({ route, method }: FormProps) {
+export default function Form({ method }: FormProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = window.location.pathname;
 
   const name = method === "Login" ? "Login" : "Register";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
     e.preventDefault();
 
-    try {
-      const res = await api.post(route, { username, password });
-      if (method === "Login") {
-        localStorage.setItem(ACCESS_TOKEN, res.data.access);
-        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-        navigate("/");
-      } else {
-        navigate("/login");
-      }
-    } catch (error: unknown) {
-      alert(error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+
+    navigate("/home");
+
+    // try {
+    //   const res = await api.post(route, { username, password });
+    //   if (method === "Login") {
+    //     localStorage.setItem(ACCESS_TOKEN, res.data.access);
+    //     localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+    //     navigate("/home");
+    //   } else {
+    //     navigate("/login");
+    //   }
+    // } catch (error: unknown) {
+    //   alert(error);
+    // } finally {
+    //   setLoading(false);
+    // }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -50,7 +59,7 @@ export default function Form({ route, method }: FormProps) {
               <img
                 className="w-auto h-7 sm:h-8"
                 src="https://merakiui.com/images/logo.svg"
-                alt=""
+                alt="Logo"
               />
               <h1 className="mt-4 text-gray-600 md:text-lg">
                 Welcome {name ? "back" : ""}
@@ -110,21 +119,30 @@ export default function Form({ route, method }: FormProps) {
                     </svg>
                   </span>
                   <input
-                    type="password"
-                    className="block w-full py-3 pl-12 pr-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition duration-200 shadow-sm text-sm"
+                    type={showPassword ? "text" : "password"}
+                    className="block w-full py-3 pl-12 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition duration-200 shadow-sm text-sm"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                   />
+                  <span
+                    className="absolute right-3 cursor-pointer"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEyeInvisible className="w-5 h-5 text-gray-400" />
+                    ) : (
+                      <AiOutlineEye className="w-5 h-5 text-gray-400" />
+                    )}
+                  </span>
                 </div>
-
-                {loading && <LoadingIndicator />}
 
                 <div className="mt-8 flex flex-col items-center gap-4">
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 font-medium tracking-widest text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    className="w-full flex items-center justify-center gap-4 px-6 py-3 font-medium text-lg text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                   >
+                    {loading && <LoadingIndicator />}
                     {name}
                   </button>
                   {location === "/register" && (
