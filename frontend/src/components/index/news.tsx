@@ -45,7 +45,7 @@ const news: NewsItem[] = [
 
 export default function News() {
   return (
-    <div  id="news" className="w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+    <div id="news" className="w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
       <div className="max-w-2xl text-center mx-auto mb-10 lg:mb-14">
         <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
           Read our latest news
@@ -74,7 +74,9 @@ export default function News() {
                 {item.category}
               </p>
               <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600">
-                {item.title}
+                <Link to={item.imageUrl} target="_blank">
+                  {item.title}
+                </Link>
               </h3>
             </div>
           </Link>

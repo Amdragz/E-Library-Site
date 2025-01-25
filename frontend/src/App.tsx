@@ -6,9 +6,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Footer from "./components/common/footer";
 import Navbar from "./components/common/navbar";
-// import ProtectedRoute from "./components/auth/ProtectedRoute";
 import History from "./pages/History";
 import Home from "./pages/Home";
 import Index from "./pages/Index";
@@ -46,25 +46,25 @@ function Layout() {
         <Route
           path="/home"
           element={
-            // <ProtectedRoute>
-            <Home />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/library"
           element={
-            // <ProtectedRoute>
-            <Library />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <Library />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/history"
           element={
-            // <ProtectedRoute>
-            <History />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <History />
+            </ProtectedRoute>
           }
         />
         <Route path="/login" element={<Login />} />

@@ -40,7 +40,7 @@ export default function HeroSection() {
               <BiSearchAlt className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             </div>
             <Link
-              to="#"
+              to="/register"
               className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
             >
               <BiBook className="mr-2" />

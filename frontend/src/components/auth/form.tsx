@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { BiBook } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-// import api from "../../api";
-// import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
+import api from "../../api";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import "../../styles/form.css";
 import LoadingIndicator from "../common/loadingIndicator";
 
@@ -13,7 +14,7 @@ interface FormProps {
   method: "Login" | "Register";
 }
 
-export default function Form({ method }: FormProps) {
+export default function Form({ method, route }: FormProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,20 +31,20 @@ export default function Form({ method }: FormProps) {
 
     navigate("/home");
 
-    // try {
-    //   const res = await api.post(route, { username, password });
-    //   if (method === "Login") {
-    //     localStorage.setItem(ACCESS_TOKEN, res.data.access);
-    //     localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-    //     navigate("/home");
-    //   } else {
-    //     navigate("/login");
-    //   }
-    // } catch (error: unknown) {
-    //   alert(error);
-    // } finally {
-    //   setLoading(false);
-    // }
+    try {
+      const res = await api.post(route, { username, password });
+      if (method === "Login") {
+        localStorage.setItem(ACCESS_TOKEN, res.data.access);
+        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        navigate("/home");
+      } else {
+        navigate("/login");
+      }
+    } catch (error: unknown) {
+      alert(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -56,11 +57,12 @@ export default function Form({ method }: FormProps) {
         <div className="container px-6 py-20 mx-auto lg:py-32">
           <div className="lg:flex">
             <div className="lg:w-1/2">
-              <img
-                className="w-auto h-7 sm:h-8"
-                src="https://merakiui.com/images/logo.svg"
-                alt="Logo"
-              />
+              <Link to="/" className="flex items-center space-x-2">
+                <BiBook className="h-8 w-8 text-blue-600" />
+                <span className="text-xl font-bold text-gray-900">
+                  E-Library
+                </span>
+              </Link>
               <h1 className="mt-4 text-gray-600 md:text-lg">
                 Welcome {name ? "back" : ""}
               </h1>

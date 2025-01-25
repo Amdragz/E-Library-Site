@@ -110,7 +110,8 @@ export default function Articles() {
                 </p>
 
                 <Link
-                  to={`/article/${index}`}
+                  to={post.imgSrc}
+                  target="_blank"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
                 >
                   Read more

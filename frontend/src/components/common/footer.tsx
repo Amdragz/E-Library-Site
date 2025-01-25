@@ -1,3 +1,4 @@
+import { BiBook } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 interface FooterProps {
@@ -50,11 +51,10 @@ export default function Footer({ isLoggedIn }: FooterProps) {
     <footer className="w-full py-4 md:py-10 px-4 sm:px-6 lg:px-8 mt-8 max-w-[82rem] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-5">
         <div>
-          <img
-            className="w-auto h-6 sm:h-7"
-            src="https://merakiui.com/images/full-logo.svg"
-            alt="Logo"
-          />
+          <Link to="/" className="flex items-center space-x-2">
+            <BiBook className="h-8 w-8 text-blue-600" />
+            <span className="text-xl font-bold text-gray-900">E-Library</span>
+          </Link>
         </div>
 
         {!isLoggedIn && (

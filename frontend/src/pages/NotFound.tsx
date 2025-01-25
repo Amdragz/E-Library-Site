@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function NotFound() {
   return (
     <section className="bg-white">
@@ -43,12 +45,16 @@ export default function NotFound() {
                   d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
                 />
               </svg>
-              <span>Go back</span>
+              <Link to="/">
+                <span>Go back</span>
+              </Link>
             </button>
 
-            <button className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600">
-              Take me home
-            </button>
+            <Link to="/">
+              <button className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600">
+                Take me home
+              </button>
+            </Link>
           </div>
         </div>
       </div>
